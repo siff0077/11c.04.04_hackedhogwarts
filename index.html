@@ -9,19 +9,45 @@
 <body>
 
     <header>
-        <div class="top">
-            <h1>Studentlist</h1>
-            <h2>Hogwarts</h2>
-        </div>
-      
 
-        <!-- <nav id="filter_buttons">
-            <button class="filter clicked" data-student="all">All</button>
-            <button class="filter" data-student="Slytherin">Slytherin</button>
-            <button class="filter" data-student="Gryffindor">Gryffindor</button>
-            <button class="filter" data-student="Hufflepuff">Hufflepuff</button>
-            <button class="filter" data-student="Ravenclaw">Ravenclaw</button>
-        </nav> -->
+      <!-- SEARCH BAR -->
+      <div class="search-container">
+        <form action="/action_page.php">
+          <input type="text" placeholder="Search" name="search">
+          <!-- <button type="submit"><i class="fa fa-search"></i></button> -->
+        </form>
+    </div>
+
+        <div class="headline">
+            <h1>Hogwarts School of Witchcraft and Wizardry</h1>
+            <h2>Studentlist</h2>
+        </div>
+
+        <div id="attending_expelled_buttons">
+  <button>Attending students</button>
+  <button>Expelled students</button>
+  </div>
+      
+  <!-- SORTING -->
+  <select id="sorting">
+    <option value="all">All</option>
+    <option value="firstname">Firstname</option>
+    <option value="lastname">Lastname</option>
+    <option value="house">House</option>
+    <option value="gender">Gender</option>
+    <option value="responsibilities">Responsibilites</option>
+    <option value="attending/expelled">Attending/Expelled</option>
+  </select>
+
+<!-- FILTER -->
+        <select id="filter">
+            <option value="none">None</option>
+            <option value="gryffindor">Gryffindor</option>
+            <option value="hufflepuff">Hufflepuff</option>
+            <option value="ravenclaw">Ravenclaw</option>
+            <option value="slytherin">Slytherin</option>
+
+        </select>
     </header>
     
 
@@ -45,7 +71,7 @@
       <template id="student">
         <tr>
             <td data-field="firstname">Firstname</td>
-            <img src="" alt="" />
+            <img src="" alt=""/>
             <td data-field="nickname">Nickname</td>
             <td data-field="middlename">Middlename</td>
             <td data-field="lastname">Lastname</td>
@@ -54,17 +80,46 @@
         </tr>
       </template>
      
-   <!--  <section id="popup">
-      <article class="popup_article">
-        <h3 class="firstName"></h3>
-        <h4 class=" middleName lastName"></h4>
-        <p class="popup_gender"></p>
-        <p class="popup_house"></p>
-        <button class="close">Close</button>
-      </article>
-    </section>
-  </main> -->
+   
+  </main> 
+
+
+  <footer>© Siff Leva Jensen // 2021</footer>
 
       <script src="script.js"></script>
   </body>
   </html>
+
+      
+
+    <!-- STUDENT LIST
+    <section id="container"></section>
+    <template>
+        <article id="grid-article">
+            <h3 class="firstname"></h3>
+            <h3 class="lastname"></h3>
+            <h3 class="house"></h3>
+        </article>
+    </template> 
+
+     STUDENT POPUP -->
+    <!-- <section id="popup">
+        <article>
+            <button id="close-popup">X</button>
+            <img src="" alt="" />
+            <div>
+                <h2></h2>
+                <p><span class="lang"></span></p>
+            </div>
+        </article>
+    </section> -->
+
+
+<!-- Gradients to popup house colors -->
+
+<!-- <div class="gryffindor"></div>
+<div class="hufflepuff"></div>
+<div class="rawenclaw"></div>
+<div class="slytherin"></div>
+
+<div><p>Arrow to top</p></div> --> 
