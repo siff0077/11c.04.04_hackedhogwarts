@@ -1,0 +1,72 @@
+/* body {
+  background-color: white(81, 143, 148);
+}
+h1,
+h2 {
+  display: flex;
+  justify-content: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.menu {
+  width: 90vw;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  padding-bottom: 30px;
+}
+.main_article {
+  background-color: rgb(31, 31, 34);
+  display: flex;
+  justify-content: center;
+}
+.main_article p {
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.section {
+  width: 90vw;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+} */
+
+/**************************Pop-up vindue**********************/
+/**************************Start**********************/
+
+/* #popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  text-decoration-color: black;
+}
+.popup_article {
+  width: 80vw;
+  height: auto;
+  margin: 4rem auto;
+  background-color: white;
+  border: 3px solid black;
+  flex-direction: row;
+  padding: 10px;
+}
+#popup .close {
+  position: fixed;
+  top: 77px;
+  right: 120px;
+  background-color: snow;
+  color: black;
+  border-radius: 5px;
+  padding: 0.1rem;
+  cursor: pointer;
+} */
+/**************************Pop-up vindue**********************/
+/**************************Slut**********************/
