@@ -44,22 +44,21 @@
     <option value="responsibilities">Responsibilites</option>
     <option value="attending/expelled">Attending/Expelled</option>
   </select>
-
 <!-- FILTER -->
         <p class="filter">Filter</p>
         <select id="filter">
-            <option value="none">None</option>
-            <option value="gryffindor">Gryffindor</option>
-            <option value="hufflepuff">Hufflepuff</option>
-            <option value="ravenclaw">Ravenclaw</option>
-            <option value="slytherin">Slytherin</option>
-            <option value="prefects">Prefects</option>
-            <option value="inquisitorial_squad">Inquisitorial Squad</option>
-            <option value="quidditch_players">Quidditch Players</option>
-            <option value="half-bloods">Half-Bloods</option>
-            <option value="full-bloods">Full-Bloods</option>
-            <option value="girls">Girls</option>
-            <option value="boys">Boys</option>
+            <option class="filter" data-action="filter" data-filter="all">None</option>
+            <option class="filter" data-action="filter" data-filter="house">Gryffindor</option>
+            <option class="filter" data-action="filter" data-filter="house">Hufflepuff</option>
+            <option class="filter" data-action="filter" data-filter="house">Ravenclaw</option>
+            <option class="filter" data-action="filter" data-filter="house">Slytherin</option>
+            <!-- <option class="filter" data-action="filter" data-filter="">Prefects</option>
+            <option class="filter" data-action="filter" data-filter="">Inquisitorial Squad</option>
+            <option class="filter" data-action="filter" data-filter="">Quidditch Players</option>
+            <option class="filter" data-action="filter" data-filter="">Half-Bloods</option>
+            <option class="filter" data-action="filter" data-filter="">Full-Bloods</option> -->
+            <option class="filter" data-action="filter" data-filter="gender">Girls</option>
+            <option class="filter" data-action="filter" data-filter="gender">Boys</option>
         </select>
       </div>
 

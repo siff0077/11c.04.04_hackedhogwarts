@@ -4,12 +4,18 @@ window.addEventListener("DOMContentLoaded", start);
 
 
 //Array
-const allStudents = [];
+let allStudents = [];
+let filter;
 
+const allFilterOptions = document.querySelectorAll(`option.filter[data-action="filter"`);
 
 //Start
 function start() {
     console.log("start");
+
+    // TODO: Add event-listeners to filter and sort buttons
+    allFilterOptions.forEach((filterOption) => {
+        filterOption.addEventListener("click", selectFilterOption);
 
     loadJson();
 }
@@ -121,3 +127,106 @@ function displayStudents(student) {
 
 }
 
+
+function selectFilterOption(event) {
+    filter = event.target.dataset.filter;
+    console.log(filter);
+
+    const filteredStudents = filterStudents();
+    console.log(filteredStudents);
+    displayList(filteredStudents);
+
+}
+
+function filterStudents() {
+    console.log("filterstudents");
+
+    let filteredAnimals = [];
+
+    switch (filter) {
+        case "all":
+            filteredStudents = allStudents.filter(allSelected);
+            break;
+        case "Gryffindor":
+            filteredStudents = allStudents.filter(gryffindorSelected);
+            break; 
+        case "Hufflepuff":
+            filteredStudents = allStudents.filter(hufflepuffSelected);
+            break;
+        case "Ravenclaw":
+            filteredStudents = allStudents.filter(ravenclawSelected);
+            break;
+        case "Slytherin":
+            filteredStudents = allStudents.filter(slytherinSelected);
+            break; 
+        case "Girl":
+            filteredStudents = allStudents.filter(girlSelected);
+            break; 
+        case "Boy":
+            filteredStudents = allStudents.filter(boySelected);
+            break;     
+    }
+
+
+    console.log(filteredStudents);
+    return filteredStudents;
+}
+
+function boySelected(student) {
+    console.log("boySelected");
+    if (student.genderCap === "Boy") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function girlSelected(student) {
+    console.log("girlSelected");
+    if (student.genderCap === "Girl") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function slytherinSelected(student) {
+    console.log("slytherinSelected");
+    if (student.houseCap === "Slytherin") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function ravenclawSelected(student) {
+    console.log("ravenclawSelected");
+    if (student.houseCap === "Ravenclaw") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function hufflepuffSelected(student) {
+    console.log("hufflepuffSelected");
+    if (student.houseCap === "Hufflepuff") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function gryffindorSelected(student) {
+    console.log("gryffindorSelected");
+    if (student.houseCap === "Gryffindor") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function allSelected(student) {
+    console.log("allSelected");
+    return true;
+}
