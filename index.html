@@ -4,31 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacked Hogwarts Assignment</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
 
-    <header>
+  <header>
 
-      <!-- SEARCH BAR -->
-      <div class="search-container">
-        <form action="/action_page.php">
-          <input type="text" placeholder="Search" name="search">
-          <!-- <button type="submit"><i class="fa fa-search"></i></button> -->
-        </form>
-    </div>
-
-        <div class="headline">
-            <h1>Hogwarts School of Witchcraft and Wizardry</h1>
-            <h2>Studentlist</h2>
+      <div id="header_content">
+        <img src="crest_school.png" alt="school crest">
+        <div id="headlines">
+          <h2>Hogwarts School of Witchcraft and Wizardry</h2>
+          <h3>Studentlist</h3>
         </div>
+      </div>
+</header>
 
-        <div id="attending_expelled_buttons">
+<div id="attending_expelled_buttons">
   <button>Attending students</button>
   <button>Expelled students</button>
   </div>
-      
+
+
+  <main>
+    <div id="overview">
+
+  <div id="funcion_bar">
+    <div id="sorting_filtering">
   <!-- SORTING -->
+  <p class="sorting">Sort by</p>
   <select id="sorting">
     <option value="all">All</option>
     <option value="firstname">Firstname</option>
@@ -40,86 +46,66 @@
   </select>
 
 <!-- FILTER -->
+        <p class="filter">Filter</p>
         <select id="filter">
             <option value="none">None</option>
             <option value="gryffindor">Gryffindor</option>
             <option value="hufflepuff">Hufflepuff</option>
             <option value="ravenclaw">Ravenclaw</option>
             <option value="slytherin">Slytherin</option>
-
+            <option value="prefects">Prefects</option>
+            <option value="inquisitorial_squad">Inquisitorial Squad</option>
+            <option value="quidditch_players">Quidditch Players</option>
+            <option value="half-bloods">Half-Bloods</option>
+            <option value="full-bloods">Full-Bloods</option>
+            <option value="girls">Girls</option>
+            <option value="boys">Boys</option>
         </select>
-    </header>
-    
+      </div>
 
-    <main>
+      <!-- SEARCH BAR -->
+<div id="search">
+  <form action="/action_page.php">
+    <input type="text" placeholder="Search" name="search">
+  </form>
+</div>
+
+</div>
+      
+
+<!------------------------------LISTVIEW----------------------------->
+  
+
     <table id="list">
-        <thead>
+        <!-- <thead>
           <tr>
-            <th>Firstname</th>
-            <th>Nickname</th>
-            <th>Middlename</th>
-            <th>Lastname<th>
-            <th>Gender</th>
-            <th>House</th>
           </tr>
-        </thead>
-        <tbody>
+        </thead> -->
+        <tbody class="student">
           <!-- student template will be copied and inserted here -->
         </tbody>
       </table>
-  
+
       <template id="student">
         <tr>
+          <div id="photo_readmore">
+            <img src="images/potter_h.png" alt="student" />
+            <button class="readmore">Read more</button>
+          </div>
+      <div id="info">
             <td data-field="firstname">Firstname</td>
-            <img src="" alt=""/>
             <td data-field="nickname">Nickname</td>
             <td data-field="middlename">Middlename</td>
             <td data-field="lastname">Lastname</td>
             <td data-field="gender">Gender</td>
-            <td data-field="house">house</td>
+            <td data-field="house">House</td>
+            </div>
         </tr>
       </template>
-     
-   
-  </main> 
+    </div>
+      </main>
 
 
-  <footer>© Siff Leva Jensen // 2021</footer>
-
-      <script src="script.js"></script>
+      <script src="cleaninghogwarts.js"></script>
   </body>
   </html>
-
-      
-
-    <!-- STUDENT LIST
-    <section id="container"></section>
-    <template>
-        <article id="grid-article">
-            <h3 class="firstname"></h3>
-            <h3 class="lastname"></h3>
-            <h3 class="house"></h3>
-        </article>
-    </template> 
-
-     STUDENT POPUP -->
-    <!-- <section id="popup">
-        <article>
-            <button id="close-popup">X</button>
-            <img src="" alt="" />
-            <div>
-                <h2></h2>
-                <p><span class="lang"></span></p>
-            </div>
-        </article>
-    </section> -->
-
-
-<!-- Gradients to popup house colors -->
-
-<!-- <div class="gryffindor"></div>
-<div class="hufflepuff"></div>
-<div class="rawenclaw"></div>
-<div class="slytherin"></div>
-
-<div><p>Arrow to top</p></div> --> 

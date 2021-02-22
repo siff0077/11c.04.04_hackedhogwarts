@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacked Hogwarts Assignment</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+<body>
+
+    <header>
+
+      <!-- SEARCH BAR -->
+      <div id="search">
+        <form action="/action_page.php">
+          <input type="text" placeholder="Search" name="search">
+          <!-- <button type="submit"><i class="fa fa-search"></i></button> -->
+        </form>
+    </div>
+
+        <div id="headline">
+            <h1>Hogwarts School of Witchcraft and Wizardry</h1>
+            <h2>Studentlist</h2>
+        </div>
+</header>
+
+        <div id="attending_expelled_buttons">
+  <button>Attending students</button>
+  <button>Expelled students</button>
+  </div>
+      
+  <main>
+    <div id="overview">
+    <div id="sorting_filtering">
+  <!-- SORTING -->
+  <p class="sorting">Sort by</p>
+  <select id="sorting">
+    <option value="all">All</option>
+    <option value="firstname">Firstname</option>
+    <option value="lastname">Lastname</option>
+    <option value="house">House</option>
+    <option value="gender">Gender</option>
+    <option value="responsibilities">Responsibilites</option>
+    <option value="attending/expelled">Attending/Expelled</option>
+  </select>
+
+<!-- FILTER -->
+        <p class="filter">Filter</p>
+        <select id="filter">
+            <option value="none">None</option>
+            <option value="gryffindor">Gryffindor</option>
+            <option value="hufflepuff">Hufflepuff</option>
+            <option value="ravenclaw">Ravenclaw</option>
+            <option value="slytherin">Slytherin</option>
+            <option value="prefects">Prefects</option>
+            <option value="inquisitorial_squad">Inquisitorial Squad</option>
+            <option value="quidditch_players">Quidditch Players</option>
+            <option value="half-bloods">Half-Bloods</option>
+            <option value="full-bloods">Full-Bloods</option>
+            <option value="girls">Girls</option>
+            <option value="boys">Boys</option>
+        </select>
+      </div>
+<!------------------------------LISTVIEW----------------------------->
+
+
+<table id="listview">
+  <thead>
+    <tr>
+      <div id="photo_readmore">
+        <img src="images/potter_h.png" alt="student" />
+        <p class="readmore">Read more</p>
+      </div>
+        <div id="info">
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>House</th>
+        <th>Responsibilities</th>
+        <th>Attending/Expelled</th>
+      </div>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- student template will be copied and inserted here -->
+  </tbody>
+</table>
+
+<template id="student">
+  <tr>
+    <div id="photo_readmore">
+      <img src="images/potter_h.png" alt="student" />
+      <p class="readmore">Read more</p>
+    </div>
+      <div id="info">
+      <td data-field="firstName"></td>
+      <td data-field="lastName"></td>
+      <td data-field="house"></td>
+      <td data-field="responsibility"></td>
+      <td data-field="attending_expelled"></td>
+    </div>
+  </tr>
+</template>
+
+      <!-- <section id="listview">
+        <article class="student_article">
+          <div id="photo_readmore">
+          <img src="images/potter_h.png" alt="student" />
+          <p class="readmore">Read more</p>
+        </div>
+          <div id="info">
+          <p class="firstName"></p>
+          <p class="lastName"></p>
+          <p class="house"></p>
+          <p class="responsibility"></p>
+          <p class="attending_expelled"></p>
+        </div>
+        </article>
+      </section> -->
+
+
+      <!-- TEMPLATE -->
+      <!-- <template>
+        <article class="student_article">
+          <div id="photo_readmore">
+          <img src="" alt="student" />
+          <p class="readmore">Read more</p>
+        </div>
+        <div id="info">
+          <p class="firstName"></p>
+          <p class="lastName"></p>
+          <p class="house"></p>
+          <p class="responsibility"></p>
+          <p class="attending_expelled"></p>
+        </div>
+        </article>
+      </template> -->
+    </div>
+
+<!--------------------------------POP UPS--------------------------->
+<!-- <section class="popup_warning noDisplay">
+  <article>
+      <h1 >Warning!</h1>
+      <p>You are not able to assign the chosen property to this student</p>
+      <button>Understood</button>
+    </div>
+  </article>
+</section>
+
+<section class="popup popupSlytherin noDisplay">
+  <article>
+    <div class="image_wrapper">
+      <img src="potter_h.png" alt="Student" class="popupImg" />
+      <img src="hogwarts-crest-silhouette-17.png" alt="Crest" class="popupCrest" />
+    </div>
+    <div class="textwrapper">
+      <h2 class="popupName">Harry James Potter</h2>
+      <p class="popupHouse">House:</p>
+      <p class="popupResponsibility">Respontibility:</p>
+      <p class="popupBlood">Blood:</p>
+      <p class="popupPrefect">Prefect:</p>
+      <p class="popupMember">Member of inquisitorial squad:</p>
+      <p class="popupExpelled">Expelled:</p>
+      <button class="closeButton">Close</button>
+    </div>
+    <div class="make_buttons">
+      <button>Make prefect</button>
+      <button>Make member</button>
+      <button>Expel</button>
+    </div>
+  </article>
+</section>
+
+
+
+
+<section class="popup popupGryffindor noDisplay">
+  <article>
+    <div class="image_wrapper">
+      <img src="potter_h.png" alt="Student" class="popupImg" />
+      <img src="hogwarts-crest-silhouette-7.png" alt="Crest" class="popupCrest" />
+    </div>
+    <div class="textwrapper">
+      <h2 class="popupName">Harry James Potter</h2>
+      <p class="popupHouse">House:</p>
+      <p class="popupResponsibility">Respontibility:</p>
+      <p class="popupBlood">Blood:</p>
+      <p class="popupPrefect">Prefect:</p>
+      <p class="popupMember">Member of inquisitorial squad:</p>
+      <p class="popupExpelled">Expelled:</p>
+      <button class="closeButton">Close</button>
+    </div>
+    <div class="make_buttons">
+      <button>Make prefect</button>
+      <button>Make member</button>
+      <button>Expel</button>
+    </div>
+  </article>
+</section>
+
+
+
+
+<section class="popup popupHufflepuff noDisplay">
+  <article>
+    <div class="image_wrapper">
+      <img src="potter_h.png" alt="Student" class="popupImg" />
+      <img src="hogwarts-crest-silhouette-13.png" alt="Crest" class="popupCrest" />
+    </div>
+    <div class="textwrapper">
+      <h2 class="popupName">Harry James Potter</h2>
+      <p class="popupHouse">House:</p>
+      <p class="popupResponsibility">Respontibility:</p>
+      <p class="popupBlood">Blood:</p>
+      <p class="popupPrefect">Prefect:</p>
+      <p class="popupMember">Member of inquisitorial squad:</p>
+      <p class="popupExpelled">Expelled:</p>
+      <button class="closeButton">Close</button>
+    </div>
+    <div class="make_buttons">
+      <button>Make prefect</button>
+      <button>Make member</button>
+      <button>Expel</button>
+    </div>
+  </article>
+</section>
+
+
+
+<section class="popup popupRavenclaw noDisplay">
+  <article>
+    <div class="image_wrapper">
+      <img src="potter_h.png" alt="Student" class="popupImg" />
+      <img src="hogwarts-crest-silhouette-4.png" alt="Crest" class="popupCrest" />
+    </div>
+    <div class="textwrapper">
+      <h2 class="popupName">Harry James Potter</h2>
+      <p class="popupHouse">House:</p>
+      <p class="popupResponsibility">Respontibility:</p>
+      <p class="popupBlood">Blood:</p>
+      <p class="popupPrefect">Prefect:</p>
+      <p class="popupMember">Member of inquisitorial squad:</p>
+      <p class="popupExpelled">Expelled:</p>
+      <button class="closeButton">Close</button>
+    </div>
+    <div class="make_buttons">
+      <button>Make prefect</button>
+      <button>Make member</button>
+      <button>Expel</button>
+    </div>
+  </article>
+</section> -->
+
+
+  </main> 
+
+
+  <footer>© Siff Leva Jensen // 2021</footer>
+
+      <script src="script.js"></script>
+  </body>
+  </html>

@@ -1,14 +1,12 @@
 "use strict"
 
-window.addEventListener("DOMContentLoaded", start);
-
+window.addEventListener("load", init);
 
 //Array
 const allStudents = [];
 
-
 //Start
-function start() {
+function init() {
     console.log("start");
 
     loadJson();
@@ -93,7 +91,7 @@ function displayList(){
     console.log("displayList");
 
     //clear list
-    document.querySelector("#list tbody").innerhtml = "";
+    document.querySelector("#listview tbody").innerHTML = "";
 
     //make a new list
     allStudents.forEach(displayStudents);
@@ -115,9 +113,8 @@ function displayStudents(student) {
     clone.querySelector("img").scr = `/images/${student.lastNameCap}_${student.firstNameCap.charAt(0)}.png`;
 
     //append/add clone to the list
-    document.querySelector("#list tbody").appendChild(clone);
+    document.querySelector("#listview tbody").appendChild(clone);
 
     console.log("displayStudents");
 
 }
-
