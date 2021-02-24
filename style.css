@@ -179,7 +179,7 @@ main {
   position: absolute;
   top: 1vw;
   right: 1vw;
-  background-color: white;
+  background-color: rgb(235, 184, 46);
   color: black;
   border-radius: 5px;
   cursor: pointer;
@@ -213,6 +213,7 @@ main {
 
 #popup button {
   margin-top: 15px;
+  background-color: rgb(235, 184, 46);
 }
 
 /***FOOTER***/
