@@ -1,6 +1,6 @@
 "use strict";
 
-window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("load", init);
 
 
 //Globals
@@ -12,42 +12,45 @@ let container = document.querySelector("section");
 let filterType = "all";
 let sortBy = "sorting";
 
+
+// the "start"-function
 function init() {
   console.log("init");
 
   readButtons();
-
   fetchStudentData();
 }
 
+
 function readButtons() {
-  //adds an eventlistener to each filterbutton
+  //adds eventlistener to each of the filterbuttons
   document
     .querySelectorAll("[data-action='filter']")
     .forEach((button) => button.addEventListener("click", selectedFilter));
 
-  //looks after changes in the options under #sortingList
+  //looks after any changes in the options --> #sortingList
   document.querySelector("#sortingList").onchange = function () {
     selectedSort(this.value);
   };
 }
 
+
 function selectedFilter(event) {
-  //reads witch button is clicked
+  //Checks which button is clicked
   const filter = event.target.dataset.filter;
   console.log(`Use this ${filter}`);
-  //filterList(filter);
   setFilter(filter);
 }
+
 
 function setFilter(filter) {
   filterType = filter;
   buildList();
 }
 
+
 function filterList(filteredList) {
-  //adds the selected students to filteredList
-  //let filteredList = allStudents;
+  //adds the specific students to filteredList
   if (filterType === "gryffindor") {
     filteredList = allStudents.filter(selectedGryffindor);
   } else if (filterType === "hufflepuff") {
@@ -63,37 +66,41 @@ function filterList(filteredList) {
   return filteredList;
 }
 
+
 function selectedGryffindor(house) {
-  //rerutns true if a students house is Gryffindor
+  //returns true if student's house is Gryffindor
   return house.house === "Gryffindor";
 }
 
+
 function selectedHufflepuff(house) {
-  //rerutns true if a students house is Hufflepuff
+  //returns true if student's house is Hufflepuff
   return house.house === "Hufflepuff";
 }
 
+
 function selectedRavenclaw(house) {
-  //rerutns true if a students house is Ravenclaw
+  //returns true if student's house is Ravenclaw
   return house.house === "Ravenclaw";
 }
 
+
 function selectedSlytherin(house) {
-  //rerutns true if a students house is Slytherin
+  //returns true if student's house is Slytherin
   return house.house === "Slytherin";
 }
+
 
 function selectedSort(event) {
   //checks what option is clicked
   sortBy = event;
   console.log(`Use this ${sortBy}`);
-  //sortList(sortBy);
   buildList();
 }
 
+
 function sortList(sortedList) {
-  //based on what is clicked, calls the matching function
-  //let sortedList = allStudents;
+  //Calls certain function according to what is clicked
 
   if (sortBy === "firstname_a-z") {
     sortedList = sortedList.sort(sortByFirstnameAZ);
@@ -112,7 +119,8 @@ function sortList(sortedList) {
   return sortedList;
 }
 
-//sorts by firstname a-z
+
+//sorting firstname a-z
 function sortByFirstnameAZ(firstnameA, firstnameB) {
   if (firstnameA.firstname < firstnameB.firstname) {
     return -1;
@@ -121,7 +129,8 @@ function sortByFirstnameAZ(firstnameA, firstnameB) {
   }
 }
 
-//sorts by firstname z-a
+
+//sorting firstname z-a
 function sortByFirstnameZA(firstnameA, firstnameB) {
   if (firstnameA.firstname < firstnameB.firstname) {
     return 1;
@@ -130,7 +139,8 @@ function sortByFirstnameZA(firstnameA, firstnameB) {
   }
 }
 
-//sorts by lastname a-z
+
+//sorting lastname a-z
 function sortByLastnameAZ(lastnameA, lastnameB) {
   if (lastnameA.lastname < lastnameB.lastname) {
     return -1;
@@ -139,7 +149,8 @@ function sortByLastnameAZ(lastnameA, lastnameB) {
   }
 }
 
-//sorts by lastname z-a
+
+//sorting lastname z-a
 function sortByLastnameZA(lastnameA, lastnameB) {
   if (lastnameA.lastname < lastnameB.lastname) {
     return 1;
@@ -148,7 +159,8 @@ function sortByLastnameZA(lastnameA, lastnameB) {
   }
 }
 
-//sorts by house a-z
+
+//sorting house a-z
 function sortByHouseAZ(houseA, houseB) {
   if (houseA.house < houseB.house) {
     return -1;
@@ -157,7 +169,8 @@ function sortByHouseAZ(houseA, houseB) {
   }
 }
 
-//sorts by house z-a
+
+//sorting house z-a
 function sortByHouseZA(houseA, houseB) {
   if (houseA.house < houseB.house) {
     return 1;
@@ -166,6 +179,7 @@ function sortByHouseZA(houseA, houseB) {
   }
 }
 
+
 function buildList() {
   let currentList = filterList(allStudents);
   currentList = sortList(currentList);
@@ -173,16 +187,18 @@ function buildList() {
   displayStudents(currentList);
 }
 
+
 async function fetchStudentData() {
   const respons = await fetch(link);
   json = await respons.json();
   prepareObjects(json);
 }
 
+
 function prepareObjects(jsonData) {
   jsonData.forEach((jsonObject) => {
-    // TODO: Create new object with cleaned data - and store that in the allAnimals array
 
+    // TODO: Create new object with cleaned data - and store that in the allStudents array
     //Create new object
     const studentTemplate = {
       firstname: "-not set yet-",
@@ -192,11 +208,9 @@ function prepareObjects(jsonData) {
       photo: "-not set yet-",
       house: "-not set yet-",
     };
-    // TODO: MISSING CODE HERE !!!
 
     const fullname = jsonObject.fullname.trim();
 
-    //Split "fullname" into smaller parts after each space. So we get name, type, description and age
     const fullName = jsonObject.fullname.toLowerCase().trim();
     const splitFullName = fullName.split(" ");
     const house = jsonObject.house.toLowerCase().trim();
@@ -215,7 +229,6 @@ function prepareObjects(jsonData) {
     //Create the new object from the empty object template
     const student = Object.create(studentTemplate);
 
-    //Insert value/string/substring into place
     //Firstname inserts in index 0
     let firstName =
       splitFullName[0].substring(0, 1).toUpperCase() +
@@ -229,7 +242,7 @@ function prepareObjects(jsonData) {
         splitFullName[splitFullName.length - 1].substring(0, 1).toUpperCase() +
         splitFullName[splitFullName.length - 1].substring(1);
 
-      //Check for a hyphen in the lastnames
+      //Check for a hyphen in lastname
       indexhyphen = lastName.indexOf("-");
       if (indexhyphen != -1) {
         const nameBeforeHyphen = lastName.substring(0, indexhyphen + 1);
@@ -266,15 +279,14 @@ function prepareObjects(jsonData) {
       student.middlename = middlename;
       student.nickname = nickname;
 
-      //console.log(middlename);
-      //console.log(nickname);
+
     } else {
       student.lastname = null;
       student.middlename = null;
       student.nickname = null;
     }
 
-    //Photo
+    //Photos
     if (student.lastname != null) {
       if (indexhyphen == -1) {
         if (student.firstname == "Padma" || student.firstname == "Parvati") {
@@ -302,14 +314,14 @@ function prepareObjects(jsonData) {
       student.photo = null;
     }
 
-    //House is already a seperate string so just adds the age to the object
     student.house = house.substring(0, 1).toUpperCase() + house.substring(1);
 
-    //Adds all objects (students) into the array
+    //Adds all objects "students" to the AllStudents-array
     allStudents.push(student);
   });
   displayStudents(allStudents);
 }
+
 
 function displayStudents(students) {
   console.log(students);
@@ -325,9 +337,9 @@ function displayStudents(students) {
     if (student.photo != null) {
       klon.querySelector("img").src = "images/" + student.photo;
     }
-    /* if (student.house == null) {
+    if (student.house == null) {
       klon.querySelector(".house").textContent = student.house;
-    } */
+    } 
 
     klon
       .querySelector("article")
@@ -336,6 +348,7 @@ function displayStudents(students) {
     container.appendChild(klon);
   });
 }
+
 
 function displayStudentPopup(student) {
   popup.style.display = "block";

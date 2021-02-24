@@ -46,18 +46,16 @@
 
     <div id="filter_buttons">
       <button class="filter" data-action="filter" data-filter="all">All</button>
-      <button class="filter" data-action="filter" data-filter="gryffindor">
-        Gryffindor
-      </button>
-      <button class="filter" data-action="filter" data-filter="hufflepuff">
-        Hufflepuff
-      </button>
-      <button class="filter" data-action="filter" data-filter="ravenclaw">
-        Ravenclaw
-      </button>
-      <button class="filter" data-action="filter" data-filter="slytherin">
-        Slytherin
-      </button>
+      <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+      <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
+      <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+      <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+      <button class="filter" data-action="filter" data-filter="boy">Boys</button>
+      <button class="filter" data-action="filter" data-filter="girl">Girls</button>
+      <button class="filter" data-action="filter" data-filter="prefects">Prefects</button>
+      <button class="filter" data-action="filter" data-filter="Inquisitorial">Inquisitorial Squad</button>
+      <button class="filter" data-action="filter" data-filter="pure_blood">Pure Bloods</button>
+      <button class="filter" data-action="filter" data-filter="half_blood">Half Bloods</button>
     </div>
   </div>
 
@@ -75,22 +73,40 @@
 
     <template>
       <article id="student_article">
+        <div id="photo">
         <img src="" alt="" />
+      </div>
+      <div id="info">
         <h4 class="fullname"></h4>
         <h5 class="house"></h5>
+        <button class="readmore">Read more</button>
+        </div>
       </article>
     </template>
 
     <section id="popup">
       <article>
         <button id="close">X</button>
+        <div id="popup_content">
+        <div id="photos">
         <img id="popup_student_pic" src="" alt="" />
-        <div>
+        <img class="house_crest" src="" alt="" />
+      </div>
+        <div id="text">
           <h2></h2>
-          <p>Blod-status: <span class="blodstatus"></span></p>
           <p>House: <span class="house"></span></p>
-          <img class="house_crest" src="" alt="" />
+          <p>Gender: <span class="gender"></span></p>
+          <p>Blood-status: <span class="bloodstatus"></span></p>
+
+          <p>Member of The Inquisitorial Squad:<span class="inquisitorial"></span></p>
+          <p>Prefect: <span class="prefect"></span></p>
+
+          <button class="expell_student">EXPELL STUDENT</button>
+          
+          <p></p>
+          
         </div>
+      </div>
       </article>
     </section>
 

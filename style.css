@@ -19,6 +19,7 @@ body {
 button,
 option {
   font-family: "Times New Roman", Times, serif;
+  cursor: pointer;
 }
 
 /***HEADER STYLING***/
@@ -46,12 +47,12 @@ header {
   display: flex;
   align-items: left;
   flex-direction: column;
-  margin-top: 50px;
+  padding-top: 90px;
 }
 
 #headlines h2,
 #headlines h3 {
-  color: whitesmoke;
+  color: rgb(235, 184, 46);
 }
 
 /***ATTENDING_EXPELLED BUTTONS***/
@@ -74,8 +75,10 @@ main {
 
 #overview {
   background-color: white;
-  width: 1000px;
+  width: 1150px;
   margin: 20px 0px;
+  border: solid rgb(235, 184, 46) 6px;
+  padding: 20px;
 }
 
 #function_bar {
@@ -105,30 +108,38 @@ main {
 
 .container {
   width: 90vw;
-  max-width: 1000px;
+  max-width: 1080px;
   margin: 0 auto;
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-/*
 #student_article {
   background-image: url(design_pics/annie-spratt-Bf9PT5qVZvM-unsplash.jpg);
-  border: 1px solid black;
+  border: solid rgb(20, 20, 20) 2px;
   padding: 10px;
-  border-radius: 15px;
-  text-align: center;
+  border-radius: 5px;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
 }
 
-#student_article img {
-  width: 40%;
-} */
+#student_article #photo {
+  padding: 15px;
+}
 
-/*************************POPUP***********************/
+#student_article #info {
+  padding: 45px 15px 15px 15px;
+}
 
-/* #popup {
+#student_article button {
+  margin-top: 10px;
+}
+
+/*** POPUP ***/
+
+#popup {
   position: fixed;
   left: 0;
   top: 0;
@@ -138,27 +149,53 @@ main {
   display: none;
 }
 
-#popup_student_pic {
-  height: 20%;
-  width: auto;
-}
-
 #popup article {
   display: flex;
   position: relative;
   width: 50vw;
   height: 50vh;
   margin: 4rem auto;
-  background-color: white;
+  background-color: rgb(20, 20, 20);
   flex-wrap: wrap;
+  border: solid rgb(235, 184, 46) 6px;
 }
 
 #close {
   position: absolute;
-  top: 3vw;
-  right: 3vw;
+  top: 1vw;
+  right: 1vw;
   background-color: white;
   color: black;
   border-radius: 5px;
   cursor: pointer;
-} */
+}
+
+#popup_content {
+  display: flex;
+  flex-direction: row;
+  margin: 40px;
+}
+
+#popup #photos,
+#popup #text {
+  margin: 15px;
+}
+
+#popup_student_pic {
+  height: 50%;
+  width: auto;
+}
+
+#popup p {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 100;
+  color: whitesmoke;
+}
+
+#popup h2 {
+  color: whitesmoke;
+}
+
+#popup button {
+  margin-top: 15px;
+}
