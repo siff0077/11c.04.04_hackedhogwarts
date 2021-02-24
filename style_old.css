@@ -1,0 +1,236 @@
+body {
+  background-color: rgb(199, 193, 186);
+}
+
+h2,
+h3 {
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+}
+
+th,
+button,
+option {
+  font-family: "Times New Roman", Times, serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+#header_content {
+  display: flex;
+  flex-direction: row;
+  margin: 40px 0px 40px 50px;
+  width: 1000px;
+  height: auto;
+}
+
+#header_content img {
+  width: 250px;
+  height: 250px;
+  margin-right: 40px;
+}
+
+#headlines {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+#attending_expelled_buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#attending_expelled_buttons button {
+  height: 40px;
+  width: auto;
+  margin: 0px 10px 0px 10px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#overview {
+  background-color: white;
+  width: 1000px;
+  margin: 20px 0px;
+}
+
+#function_bar {
+  display: flex;
+  flex-direction: row;
+}
+
+#sorting_filtering {
+  display: flex;
+  margin: 20px 0px;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.filter,
+.sorting {
+  margin-left: 20px;
+  margin-right: 5px;
+}
+
+#search {
+  display: flex;
+  align-self: right;
+  margin: 20px;
+  justify-content: right;
+}
+
+#list {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* tbody .student {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  border-style: solid;
+  border-color: grey;
+} */
+
+#student img {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
+
+#photo_readmore {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* .readmore {
+  border-style: solid;
+  border-color: darkgray;
+  padding: 5px;
+  background-color: lightgrey;
+} */
+
+/************ POP UPS************************/
+/* Popup general */
+
+.noDisplay {
+  display: none;
+}
+.popup {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.popup article {
+  display: flex;
+  width: 80vw;
+  max-width: 1152px;
+  height: 85vh;
+  background-color: white;
+  margin: 40px auto;
+}
+.image_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 70px;
+}
+.image_wrapper img {
+  width: 250px;
+  height: 250px;
+}
+
+.popup article .textwrapper {
+  width: 550px;
+}
+.popup article .textwrapper p {
+  margin: 10px 0;
+  color: black;
+}
+.popup article .textwrapper h2 {
+  text-align: left;
+  font-size: 35px;
+  color: black;
+}
+
+.popup article .make_buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 260px;
+}
+
+.popup article .make_buttons button {
+  background-image: none;
+  width: 150px;
+  height: 30px;
+  background-color: #795b51;
+  border: 2px solid black;
+}
+.popup article .closeButton {
+  margin: 100px 0 0 70px;
+}
+
+/* popup slytherin */
+.popupSlytherin article {
+  background-color: #3a5f43;
+}
+
+/* popup gryffindor */
+.popupGryffindor article {
+  background-color: #934d4d;
+}
+
+/* popup hufflepuff */
+.popupHufflepuff article {
+  background-color: #ad9a4e;
+}
+
+/* popup ravenclaw */
+.popupRavenclaw article {
+  background-color: #56688d;
+}
+
+/* warnings */
+
+.popup_warning article {
+  height: 70vh;
+  width: 70vw;
+  background-color: #460804;
+  position: fixed;
+  z-index: 2;
+  left: 50%;
+  top: 100px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.popup_warning article h1 {
+  margin: 50px;
+}
+
+.popup_warning article button {
+  margin-top: 100px;
+}

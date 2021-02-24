@@ -1,12 +1,23 @@
 "use strict"
 
-window.addEventListener("load", init);
+window.addEventListener("load", start);
+
 
 //Array
 const allStudents = [];
 
+//prototype-object
+const Student = {
+    firstname: "",
+    /* nickname: "", */
+    middlename: "",
+    lastname: "", 
+    house: ""
+};
+
+
 //Start
-function init() {
+function start() {
     console.log("start");
 
     loadJson();
@@ -22,14 +33,6 @@ function loadJson() {
     });
 }
 
-//prototype-object
-const Student = {
-    firstname: "",
-    /* nickname: "", */
-    middlename: "",
-    lastname: "", 
-    house: ""
-};
 
 //Prepare object and clean JsonData
 function prepareObjects(jsonData){
@@ -80,18 +83,31 @@ function prepareObjects(jsonData){
 
     });
 
-    
-
-    
-
 displayList();
 }
+
+
+
+function filterList() {
+    //create a filtered list
+    const filteredList = allStudents.filter(selectedGryffindor);
+
+    displayList(filteredList);
+}
+
+function selectedGryffindor(student) {
+    return student.genderCap === "Girl";
+}
+
+
+
+
 
 function displayList(){
     console.log("displayList");
 
     //clear list
-    document.querySelector("#listview tbody").innerHTML = "";
+    document.querySelector("#list tbody").innerHTML = ""; //<----innerHTML   ?????
 
     //make a new list
     allStudents.forEach(displayStudents);
@@ -113,8 +129,9 @@ function displayStudents(student) {
     clone.querySelector("img").scr = `/images/${student.lastNameCap}_${student.firstNameCap.charAt(0)}.png`;
 
     //append/add clone to the list
-    document.querySelector("#listview tbody").appendChild(clone);
+    document.querySelector("#list tbody").appendChild(clone);
 
     console.log("displayStudents");
 
 }
+

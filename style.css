@@ -1,18 +1,27 @@
-body {
-  background-color: rgb(199, 193, 186);
+* {
+  margin: 0;
+  box-sizing: border-box;
 }
 
+/***GENEREL STYLING***/
 h2,
 h3 {
   font-family: "Cinzel", serif;
   font-weight: 900;
 }
 
-th,
+body {
+  background-color: rgb(20, 20, 20);
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+}
+
 button,
 option {
   font-family: "Times New Roman", Times, serif;
 }
+
+/***HEADER STYLING***/
 
 header {
   display: flex;
@@ -40,6 +49,12 @@ header {
   margin-top: 50px;
 }
 
+#headlines h2,
+#headlines h3 {
+  color: whitesmoke;
+}
+
+/***ATTENDING_EXPELLED BUTTONS***/
 #attending_expelled_buttons {
   display: flex;
   justify-content: center;
@@ -51,6 +66,7 @@ header {
   margin: 0px 10px 0px 10px;
 }
 
+/***LISTVIEW***/
 main {
   display: flex;
   justify-content: center;
@@ -87,150 +103,62 @@ main {
   justify-content: right;
 }
 
-#list {
+.container {
+  width: 90vw;
+  max-width: 1000px;
+  margin: 0 auto;
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  width: 90%;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 }
 
-/* tbody .student {
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  margin: 10px;
-  border-style: solid;
-  border-color: grey;
-} */
-
-#student img {
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-}
-
-#photo_readmore {
-  display: flex;
+/*
+#student_article {
+  background-image: url(design_pics/annie-spratt-Bf9PT5qVZvM-unsplash.jpg);
+  border: 1px solid black;
   padding: 10px;
-  align-items: center;
-  flex-direction: column;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
 }
 
-/* .readmore {
-  border-style: solid;
-  border-color: darkgray;
-  padding: 5px;
-  background-color: lightgrey;
+#student_article img {
+  width: 40%;
 } */
 
-/************ POP UPS************************/
-/* Popup general */
+/*************************POPUP***********************/
 
-.noDisplay {
-  display: none;
-}
-.popup {
+/* #popup {
   position: fixed;
-  z-index: 1;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgb(0, 0, 0, 0.8);
+  display: none;
 }
 
-.popup article {
+#popup_student_pic {
+  height: 20%;
+  width: auto;
+}
+
+#popup article {
   display: flex;
-  width: 80vw;
-  max-width: 1152px;
-  height: 85vh;
+  position: relative;
+  width: 50vw;
+  height: 50vh;
+  margin: 4rem auto;
   background-color: white;
-  margin: 40px auto;
-}
-.image_wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 70px;
-}
-.image_wrapper img {
-  width: 250px;
-  height: 250px;
+  flex-wrap: wrap;
 }
 
-.popup article .textwrapper {
-  width: 550px;
-}
-.popup article .textwrapper p {
-  margin: 10px 0;
+#close {
+  position: absolute;
+  top: 3vw;
+  right: 3vw;
+  background-color: white;
   color: black;
-}
-.popup article .textwrapper h2 {
-  text-align: left;
-  font-size: 35px;
-  color: black;
-}
-
-.popup article .make_buttons {
-  display: flex;
-  flex-direction: column;
-  margin-top: 260px;
-}
-
-.popup article .make_buttons button {
-  background-image: none;
-  width: 150px;
-  height: 30px;
-  background-color: #795b51;
-  border: 2px solid black;
-}
-.popup article .closeButton {
-  margin: 100px 0 0 70px;
-}
-
-/* popup slytherin */
-.popupSlytherin article {
-  background-color: #3a5f43;
-}
-
-/* popup gryffindor */
-.popupGryffindor article {
-  background-color: #934d4d;
-}
-
-/* popup hufflepuff */
-.popupHufflepuff article {
-  background-color: #ad9a4e;
-}
-
-/* popup ravenclaw */
-.popupRavenclaw article {
-  background-color: #56688d;
-}
-
-/* warnings */
-
-.popup_warning article {
-  height: 70vh;
-  width: 70vw;
-  background-color: #460804;
-  position: fixed;
-  z-index: 2;
-  left: 50%;
-  top: 100px;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-}
-
-.popup_warning article h1 {
-  margin: 50px;
-}
-
-.popup_warning article button {
-  margin-top: 100px;
-}
+  border-radius: 5px;
+  cursor: pointer;
+} */
