@@ -63,8 +63,9 @@ header {
 
 #attending_expelled_buttons button {
   height: 40px;
-  width: auto;
+  width: 200px;
   margin: 0px 10px 0px 10px;
+  background-color: rgb(235, 184, 46);
 }
 
 /***LISTVIEW***/
@@ -97,6 +98,20 @@ main {
 .sorting {
   margin-left: 20px;
   margin-right: 5px;
+}
+
+#sortingList {
+  height: 20px;
+  width: auto;
+  margin-top: 5px;
+}
+
+#filter_buttons button {
+  height: 20px;
+  width: 140px;
+  margin: 5px;
+  color: whitesmoke;
+  background-color: rgb(20, 20, 20);
 }
 
 #search {
@@ -198,4 +213,24 @@ main {
 
 #popup button {
   margin-top: 15px;
+}
+
+/***FOOTER***/
+
+footer {
+  padding: 40px;
+  background-color: whitesmoke;
+  margin-top: 100px;
+}
+
+footer div {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+footer p,
+footer a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
 }
