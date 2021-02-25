@@ -13,7 +13,7 @@ let filterType = "all";
 let sortBy = "sorting";
 const search = document.querySelector(".search");
 search.addEventListener("input", searching);
-let displayedStudentsCount = document.querySelector(".studentcount");
+let displayedStudentsCount = document.querySelector("#studentcount");
 
 // the "start"-function
 function init() {
@@ -367,9 +367,9 @@ function displayStudents(students) {
     if (student.photo != null) {
       klon.querySelector("img").src = "images/" + student.photo;
     }
-    if (student.house == null) {
-      klon.querySelector(".house").textContent = student.house;
-    } 
+
+    klon.querySelector(".house").textContent = student.house;
+     
 
     klon
       .querySelector("article")
@@ -403,7 +403,9 @@ function displayStudentPopup(student) {
       student.lastname;
   }
   
-  
+  popup.querySelector(".house").textContent = student.house;
+  popup.querySelector(".gender").textContent = student.gender;
+
   popup.querySelector("#house_crest").src = "crests/" + student.house + ".png";
   if (student.photo != null) {
     popup.querySelector("img").src = "images/" + student.photo;

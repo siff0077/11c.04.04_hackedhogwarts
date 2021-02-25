@@ -75,10 +75,11 @@ main {
 }
 
 #overview {
-  background-color: white;
+  background-color: whitesmoke;
   width: 1150px;
   margin: 20px 0px;
   border: solid rgb(235, 184, 46) 6px;
+  border-radius: 5px;
   padding: 20px;
 }
 
@@ -114,6 +115,10 @@ main {
   background-color: rgb(20, 20, 20);
 }
 
+#studentcount {
+  margin-right: 15px;
+}
+
 #search {
   display: flex;
   align-self: right;
@@ -131,13 +136,13 @@ main {
 }
 
 #student_article {
-  background-image: url(design_pics/annie-spratt-Bf9PT5qVZvM-unsplash.jpg);
   border: solid rgb(20, 20, 20) 2px;
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   flex-direction: row;
+  background-color: white;
 }
 
 #student_article #photo {
@@ -171,7 +176,6 @@ main {
   height: 55vh;
   margin: 4rem auto;
   background-color: rgb(20, 20, 20);
-
   border: solid rgb(235, 184, 46) 6px;
 }
 
