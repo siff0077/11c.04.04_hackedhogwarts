@@ -414,4 +414,28 @@ function displayStudentPopup(student) {
   document.querySelector("#close").addEventListener("click", () => (popup.style.display = "none"));
 
 
+
+  //Div where the theme color will show
+const color_of_house = document.querySelector('#color_of_house');
+//Color for each house
+//Code from - https://www.w3schools.com/js/js_switch.asp
+switch (true) {
+  //If there is a match, the associated block of code is executed
+  //If there is no match, the default code block is executed (white background)
+  case student.house === 'Gryffindor':
+    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(238,186,48,1) 0%, rgba(238,186,48,1) 25%, rgba(188,126,28,1) 50%, rgba(116,0,1,1) 75%, rgba(116,0,1,1) 100%);'); 
+    break;
+  case student.house === 'Slytherin':
+    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(42,98,61,1) 0%, rgba(26,71,42,1) 50%, rgba(0,0,0,1) 100%);');
+    break;
+  case student.house === 'Hufflepuff':
+    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(36,36,0,1) 0%, rgba(109,121,9,1) 25%, rgba(160,166,6,1) 50%, rgba(189,207,3,1) 75%, rgba(255,243,0,1) 100%);');
+    break;
+  case student.house === 'Ravenclaw':
+    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(34,47,91,1) 0%, rgba(14,26,64,1) 75%, rgba(0,0,0,1) 100%);');
+    break;
+
+
+}
+
 }
