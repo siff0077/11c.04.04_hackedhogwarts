@@ -168,10 +168,10 @@ main {
   display: flex;
   position: relative;
   width: 50vw;
-  height: 50vh;
+  height: 55vh;
   margin: 4rem auto;
   background-color: rgb(20, 20, 20);
-  flex-wrap: wrap;
+
   border: solid rgb(235, 184, 46) 6px;
 }
 
@@ -188,7 +188,7 @@ main {
 #popup_content {
   display: flex;
   flex-direction: row;
-  margin: 40px;
+  margin: 30px;
 }
 
 #popup #photos,
@@ -196,9 +196,22 @@ main {
   margin: 15px;
 }
 
-#popup_student_pic {
-  height: 50%;
-  width: auto;
+#popup #photos {
+  display: flex;
+  flex-direction: column;
+}
+
+#popup_photo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+#house_crest {
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 #popup p {

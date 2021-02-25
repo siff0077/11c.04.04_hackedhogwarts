@@ -11,7 +11,9 @@ let temp = document.querySelector("template");
 let container = document.querySelector("section");
 let filterType = "all";
 let sortBy = "sorting";
-
+const search = document.querySelector(".search");
+search.addEventListener("input", searching);
+let displayedStudentsCount = document.querySelector(".studentcount");
 
 // the "start"-function
 function init() {
@@ -19,6 +21,24 @@ function init() {
 
   readButtons();
   fetchStudentData();
+}
+
+
+//SEARCH
+function searching(event) {
+  let searchList = allStudents.filter((student) => {
+    let name = "";
+    if (student.lastname === null) {
+      name = student.firstname;
+    } else {
+      name = student.firstname + " " + student.lastname;
+    }
+    return name.toLowerCase().includes(event.target.value);
+  });
+
+  //Show number of students
+  displayedStudentsCount.textContent = `Students: ${searchList.length}`;
+  displayStudents(searchList);
 }
 
 
@@ -62,9 +82,14 @@ function filterList(filteredList) {
   }
   //TODO: filter on expelled and unexpelled
 
+//Show number of students
+displayedStudentsCount.textContent = `Students: ${filteredList.length}`;
+
   console.log(filteredList);
   return filteredList;
 }
+
+
 
 
 function selectedGryffindor(house) {
@@ -316,6 +341,11 @@ function prepareObjects(jsonData) {
 
     student.house = house.substring(0, 1).toUpperCase() + house.substring(1);
 
+    student.gender = jsonObject.gender;
+
+    //Show number of students
+    displayedStudentsCount.textContent = `Students: ${allStudents.length}`;
+
     //Adds all objects "students" to the AllStudents-array
     allStudents.push(student);
   });
@@ -372,14 +402,14 @@ function displayStudentPopup(student) {
       " " +
       student.lastname;
   }
-  //popup.querySelector(".blodstatus").textContent = student.house;
-  popup.querySelector(".house").textContent = student.house;
-  //popup.querySelector(".house_crest").src = ;
+  
+  
+  popup.querySelector("#house_crest").src = "crests/" + student.house + ".png";
   if (student.photo != null) {
     popup.querySelector("img").src = "images/" + student.photo;
   }
 
-  document
-    .querySelector("#close")
-    .addEventListener("click", () => (popup.style.display = "none"));
+  document.querySelector("#close").addEventListener("click", () => (popup.style.display = "none"));
+
+
 }
