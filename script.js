@@ -24,7 +24,6 @@ function init() {
 
   readButtons();
   fetchStudentData();
-  /* fetchBloodData();  */
 }
 
 
@@ -259,14 +258,17 @@ function prepareObjects(jsonData) {
     // TODO: Create new object with cleaned data - and store that in the allStudents array
     //Create new object
     const Student = {
-      firstname: "-not set yet-",
-      lastname: "-not set yet-",
-      middlename: "-not set yet-",
-      nickname: "-not set yet-",
-      photo: "-not set yet-",
-      house: "-not set yet-",
-      gender: "-not set yet-",
+      firstname: "",
+      lastname: "",
+      middlename: "",
+      nickname: "",
+      photo: "",
+      house: "",
+      gender: "",
       bloodStatus: "",
+      prefect: false,
+      inquisitorial: false,
+      expelled: false,
     };
 
 
@@ -383,6 +385,9 @@ function prepareObjects(jsonData) {
     const genderTrimmed = jsonObject.gender.substring(0).trim();
     student.gender = genderTrimmed.substring(0, 1).toUpperCase() + genderTrimmed.substring(1).toLowerCase();
 
+    //Prefect
+    student.prefect = false;
+
     //Define bloodstatus
     student.bloodStatus = addBloodStatusToStudent(student);
 
@@ -436,6 +441,13 @@ function displayStudents(students) {
 
 function displayStudentPopup(student) {
   popup.style.display = "block";
+
+if (student.prefect != true) {
+  document.querySelector("#prefect_button").classList.remove("clicked_button");
+} else {
+  document.querySelector("#prefect_button").classList.add("clicked_button");
+}
+
   if (student.middlename == null && student.nickname == null) {
     if (student.lastname == null) {
       popup.querySelector("h2").textContent = student.firstname;
@@ -467,8 +479,13 @@ function displayStudentPopup(student) {
 
   popup.querySelector(".bloodstatus").textContent = student.bloodStatus;
 
-  document.querySelector("#close").addEventListener("click", () => (popup.style.display = "none"));
 
+  document.querySelector("#close").addEventListener("click", () => {
+    
+    popup.style.display = "none";
+
+   
+  });
 
 
   //Div where the theme color will show
