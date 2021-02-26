@@ -15,12 +15,16 @@ const search = document.querySelector(".search");
 search.addEventListener("input", searching);
 let displayedStudentsCount = document.querySelector("#studentcount");
 
+const bloodLink = "https://petlatkea.dk/2021/hogwarts/families.json";
+let bloodStatus; 
+
 // the "start"-function
 function init() {
   console.log("init");
 
   readButtons();
   fetchStudentData();
+  /* fetchBloodData();  */
 }
 
 
@@ -79,7 +83,11 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(selectedRavenclaw);
   } else if (filterType === "slytherin") {
     filteredList = allStudents.filter(selectedSlytherin);
-  }
+  } /* else if (filterType === "pureblood") {
+    filteredList = allStudents.filter(selectedPureBlood);
+  }else if (filterType === "halfblood") {
+    filteredList = allStudents.filter(selectedHalfBlood);
+  } */
   //TODO: filter on expelled and unexpelled
 
 //Show number of students
@@ -114,6 +122,22 @@ function selectedSlytherin(house) {
   //returns true if student's house is Slytherin
   return house.house === "Slytherin";
 }
+
+/* function selectedPureBlood(bloodstatus) {
+  if (student.bloodstatus === "Pureblood") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function selectedHalfBlood(bloodstatus) {
+  if (student.bloodstatus === "Halfblood") {
+    return true;
+  } else {
+    return false;
+  }
+} */
 
 
 function selectedSort(event) {
@@ -216,8 +240,17 @@ function buildList() {
 async function fetchStudentData() {
   const respons = await fetch(link);
   json = await respons.json();
+
+  const responsBlood = await fetch(bloodLink);
+  bloodStatus = await responsBlood.json();
   prepareObjects(json);
 }
+
+
+async function fetchBloodData() {
+  const respons = await fetch(bloodLink);
+  bloodStatus = await respons.json();
+} 
 
 
 function prepareObjects(jsonData) {
@@ -225,20 +258,26 @@ function prepareObjects(jsonData) {
 
     // TODO: Create new object with cleaned data - and store that in the allStudents array
     //Create new object
-    const studentTemplate = {
+    const Student = {
       firstname: "-not set yet-",
       lastname: "-not set yet-",
       middlename: "-not set yet-",
       nickname: "-not set yet-",
       photo: "-not set yet-",
       house: "-not set yet-",
+      gender: "-not set yet-",
+      bloodStatus: "",
     };
 
+
+    //Create the new object from the empty object template
+    const student = Object.create(Student);
+
+    //Define names
     const fullname = jsonObject.fullname.trim();
 
     const fullName = jsonObject.fullname.toLowerCase().trim();
     const splitFullName = fullName.split(" ");
-    const house = jsonObject.house.toLowerCase().trim();
 
     const firstSpaceBeforeName = fullName.indexOf(" ");
     const lastSpaceBeforeName = fullName.lastIndexOf(" ");
@@ -250,9 +289,6 @@ function prepareObjects(jsonData) {
     let indexhyphen = 0;
     let firstLetterAfterHyphen = "";
     let smallLettersAfterHyphen = "";
-
-    //Create the new object from the empty object template
-    const student = Object.create(studentTemplate);
 
     //Firstname inserts in index 0
     let firstName =
@@ -339,9 +375,16 @@ function prepareObjects(jsonData) {
       student.photo = null;
     }
 
+    //Define the house
+    const house = jsonObject.house.toLowerCase().trim();
     student.house = house.substring(0, 1).toUpperCase() + house.substring(1);
 
-    student.gender = jsonObject.gender;
+    //Define the gender
+    const genderTrimmed = jsonObject.gender.substring(0).trim();
+    student.gender = genderTrimmed.substring(0, 1).toUpperCase() + genderTrimmed.substring(1).toLowerCase();
+
+    //Define bloodstatus
+    student.bloodStatus = addBloodStatusToStudent(student);
 
     //Show number of students
     displayedStudentsCount.textContent = `Students: ${allStudents.length}`;
@@ -350,6 +393,17 @@ function prepareObjects(jsonData) {
     allStudents.push(student);
   });
   displayStudents(allStudents);
+}
+
+
+function addBloodStatusToStudent(student) {
+  if (bloodStatus.half.indexOf(student.lastname) != -1) {
+    return "Halfblood";
+  } else if (bloodStatus.pure.indexOf(student.lastname) != -1) {
+    return "Pureblood";
+  } else {
+    return "Muggleborn";
+  }
 }
 
 
@@ -411,6 +465,8 @@ function displayStudentPopup(student) {
     popup.querySelector("img").src = "images/" + student.photo;
   }
 
+  popup.querySelector(".bloodstatus").textContent = student.bloodStatus;
+
   document.querySelector("#close").addEventListener("click", () => (popup.style.display = "none"));
 
 
@@ -423,19 +479,18 @@ switch (true) {
   //If there is a match, the associated block of code is executed
   //If there is no match, the default code block is executed (white background)
   case student.house === 'Gryffindor':
-    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(238,186,48,1) 0%, rgba(238,186,48,1) 25%, rgba(188,126,28,1) 50%, rgba(116,0,1,1) 75%, rgba(116,0,1,1) 100%);'); 
+    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(95,27,5,1) 0%, rgba(121,35,9,1) 25%, rgba(166,62,6,1) 50%, rgba(207,74,3,1) 75%, rgba(255,101,0,1) 100%);'); 
     break;
   case student.house === 'Slytherin':
-    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(42,98,61,1) 0%, rgba(26,71,42,1) 50%, rgba(0,0,0,1) 100%);');
+    color_of_house.setAttribute('style', 'background: linear-gradient(360deg, rgba(42,98,61,1) 0%, rgba(26,71,42,1) 50%, rgba(0,0,0,1) 100%);');
     break;
   case student.house === 'Hufflepuff':
-    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(36,36,0,1) 0%, rgba(109,121,9,1) 25%, rgba(160,166,6,1) 50%, rgba(189,207,3,1) 75%, rgba(255,243,0,1) 100%);');
+    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(36,30,0,1) 0%, rgba(121,105,9,1) 25%, rgba(169,157,6,1) 50%, rgba(214,188,3,1) 75%, rgba(255,223,0,1) 100%);');
     break;
   case student.house === 'Ravenclaw':
-    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(34,47,91,1) 0%, rgba(14,26,64,1) 75%, rgba(0,0,0,1) 100%);');
+    color_of_house.setAttribute('style', 'background: linear-gradient(360deg, rgba(34,47,91,1) 0%, rgba(14,26,64,1) 75%, rgba(0,0,0,1) 100%);');
     break;
 
 
 }
-
 }

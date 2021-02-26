@@ -11,7 +11,14 @@ h3 {
 }
 
 body {
-  background-color: rgb(20, 20, 20);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(28, 28, 28, 1) 25%,
+    rgba(44, 44, 44, 1) 50%,
+    rgba(60, 60, 60, 1) 75%,
+    rgba(89, 89, 89, 1) 100%
+  );
   font-family: "Cinzel", serif;
   font-weight: 900;
 }
@@ -20,6 +27,13 @@ button,
 option {
   font-family: "Times New Roman", Times, serif;
   cursor: pointer;
+  background-color: rgb(235, 184, 46);
+}
+
+button:hover,
+button:focus {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(255, 255, 0, 0.211);
 }
 
 /***HEADER STYLING***/
@@ -54,6 +68,20 @@ header {
 #headlines h3 {
   color: rgb(235, 184, 46);
 }
+
+/***CRESTS***/
+
+/* #crests {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#crests img {
+  width: 20vh;
+  height: auto;
+  margin: 40px;
+} */
 
 /***ATTENDING_EXPELLED BUTTONS***/
 #attending_expelled_buttons {
@@ -105,14 +133,15 @@ main {
   height: 20px;
   width: auto;
   margin-top: 5px;
+  margin-right: 60px;
+  margin-left: 5px;
 }
 
 #filter_buttons button {
   height: 20px;
   width: 140px;
   margin: 5px;
-  color: whitesmoke;
-  background-color: rgb(20, 20, 20);
+  background-color: rgb(235, 184, 46);
 }
 
 #studentcount {
