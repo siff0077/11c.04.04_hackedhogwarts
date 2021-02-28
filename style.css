@@ -10,14 +10,23 @@ h3 {
   font-weight: 900;
 }
 
+#headline {
+  display: flex;
+  flex-direction: row;
+}
+
+#hackthesystem {
+  cursor: pointer;
+}
+
 body {
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 1) 0%,
-    rgba(28, 28, 28, 1) 25%,
-    rgba(44, 44, 44, 1) 50%,
-    rgba(60, 60, 60, 1) 75%,
-    rgba(89, 89, 89, 1) 100%
+    rgba(14, 14, 14, 1) 25%,
+    rgba(28, 28, 28, 1) 50%,
+    rgba(27, 27, 27, 1) 75%,
+    rgba(36, 36, 36, 1) 100%
   );
   font-family: "Cinzel", serif;
   font-weight: 900;
@@ -72,16 +81,16 @@ header {
 /***CRESTS***/
 
 /* #crests {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-#crests img {
-  width: 20vh;
-  height: auto;
-  margin: 40px;
-} */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  #crests img {
+    width: 20vh;
+    height: auto;
+    margin: 40px;
+  } */
 
 /***ATTENDING_EXPELLED BUTTONS***/
 #attending_expelled_buttons {
@@ -280,4 +289,19 @@ footer p,
 footer a {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 100;
+}
+
+.button_clicked {
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right,
+    #9dacb4 0%,
+    #899b8b 25%,
+    #726e6e 50%,
+    #aa9b9b 75%,
+    #a3a188 100%
+  );
+  color: rgb(20, 20, 20);
 }

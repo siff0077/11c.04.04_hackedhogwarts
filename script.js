@@ -18,9 +18,32 @@ let displayedStudentsCount = document.querySelector("#studentcount");
 const bloodLink = "https://petlatkea.dk/2021/hogwarts/families.json";
 let bloodStatus; 
 
+let expelledStudents = [];
+let selectedStudent;
+
+let systemHacked = false;
+
+// TODO: Create new object with cleaned data - and store that in the allStudents array
+    //Create new object
+    const Student = {
+      firstname: "",
+      lastname: "",
+      middlename: "",
+      nickname: "",
+      photo: "",
+      house: "",
+      gender: "",
+      bloodStatus: "",
+      prefect: false,
+      inquisitorial: false,
+      expelled: false,
+    };
+
 // the "start"-function
 function init() {
   console.log("init");
+
+  document.querySelector("#hackthesystem").addEventListener("click", hackTheSystem);
 
   readButtons();
   fetchStudentData();
@@ -61,7 +84,7 @@ function readButtons() {
 function selectedFilter(event) {
   //Checks which button is clicked
   const filter = event.target.dataset.filter;
-  console.log(`Use this ${filter}`);
+  console.log(`filtered by ${filter}`);
   setFilter(filter);
 }
 
@@ -82,15 +105,26 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(selectedRavenclaw);
   } else if (filterType === "slytherin") {
     filteredList = allStudents.filter(selectedSlytherin);
-  } /* else if (filterType === "pureblood") {
+  } else if (filterType === "boy") {
+    filteredList = allStudents.filter(selectedBoys);
+  } else if (filterType === "girl") {
+    filteredList = allStudents.filter(selectedGirls);
+  } /* else if (filterType === "prefects") {
+    filteredList = allStudents.filter(selectedPrefects);
+  } */  /* else if (filterType === "pure") {
     filteredList = allStudents.filter(selectedPureBlood);
-  }else if (filterType === "halfblood") {
+  } */ /*  else if (filterType === "halfblood") {
     filteredList = allStudents.filter(selectedHalfBlood);
-  } */
+  }  */
   //TODO: filter on expelled and unexpelled
+  else if (filterType === "expelled") {
+    filteredList = expelledStudents;
+
+    console.log(expelledStudents);
+  }
 
 //Show number of students
-displayedStudentsCount.textContent = `Students: ${filteredList.length}`;
+displayedStudentsCount.textContent = `Number of displayed students: ${filteredList.length}`;
 
   console.log(filteredList);
   return filteredList;
@@ -117,20 +151,30 @@ function selectedRavenclaw(house) {
 }
 
 
-function selectedSlytherin(house) {
+function selectedBoys(gender) {
   //returns true if student's house is Slytherin
-  return house.house === "Slytherin";
+  return gender.gender === "Boy";
 }
 
-/* function selectedPureBlood(bloodstatus) {
-  if (student.bloodstatus === "Pureblood") {
+function selectedGirls(gender) {
+  //returns true if student's house is Slytherin
+  return gender.gender === "Girl";
+}
+
+/* function selectedPrefects(prefect) {
+  //returns true if student is prefect
+  return prefects.prefect === "prefect";
+} */ 
+
+/* function selectedPureBlood(bloodStatus) {
+  if (bloodStatus.pure === "pure") {
     return true;
   } else {
     return false;
   }
-}
+} */
 
-function selectedHalfBlood(bloodstatus) {
+/* function selectedHalfBlood(bloodstatus) {
   if (student.bloodstatus === "Halfblood") {
     return true;
   } else {
@@ -142,7 +186,7 @@ function selectedHalfBlood(bloodstatus) {
 function selectedSort(event) {
   //checks what option is clicked
   sortBy = event;
-  console.log(`Use this ${sortBy}`);
+  console.log(`Sorted by: ${sortBy}`);
   buildList();
 }
 
@@ -246,16 +290,16 @@ async function fetchStudentData() {
 }
 
 
-async function fetchBloodData() {
+/* async function fetchBloodData() {
   const respons = await fetch(bloodLink);
   bloodStatus = await respons.json();
-} 
+}  */
 
 
 function prepareObjects(jsonData) {
   jsonData.forEach((jsonObject) => {
 
-    // TODO: Create new object with cleaned data - and store that in the allStudents array
+    /* // TODO: Create new object with cleaned data - and store that in the allStudents array
     //Create new object
     const Student = {
       firstname: "",
@@ -269,7 +313,7 @@ function prepareObjects(jsonData) {
       prefect: false,
       inquisitorial: false,
       expelled: false,
-    };
+    }; */
 
 
     //Create the new object from the empty object template
@@ -442,11 +486,23 @@ function displayStudents(students) {
 function displayStudentPopup(student) {
   popup.style.display = "block";
 
-if (student.prefect != true) {
-  document.querySelector("#prefect_button").classList.remove("clicked_button");
-} else {
-  document.querySelector("#prefect_button").classList.add("clicked_button");
-}
+  if (student.expelled != true) {
+    document.querySelector("#expell_button").classList.remove("button_clicked");
+  } else {
+    document.querySelector("#expell_button").classList.add("button_clicked");
+  }
+
+  if (student.prefect != true) {
+    document.querySelector("#prefect_button").classList.remove("button_clicked");
+  } else {
+    document.querySelector("#prefect_button").classList.add("button_clicked");
+  }
+
+  if (student.squad != true) {
+    document.querySelector("#inquisitorial_button").classList.remove("button_clicked");
+  } else {
+    document.querySelector("#inquisitorial_button").classList.add("button_clicked");
+  }
 
   if (student.middlename == null && student.nickname == null) {
     if (student.lastname == null) {
@@ -468,6 +524,7 @@ if (student.prefect != true) {
       " " +
       student.lastname;
   }
+
   
   popup.querySelector(".house").textContent = student.house;
   popup.querySelector(".gender").textContent = student.gender;
@@ -479,35 +536,221 @@ if (student.prefect != true) {
 
   popup.querySelector(".bloodstatus").textContent = student.bloodStatus;
 
+  //expell, prefect and squad
+  document.querySelector("#expell_button").addEventListener("click", expell);
+
+  document
+    .querySelector("#prefect_button")
+    .addEventListener("click", togglePrefect);
+
+  document.querySelector("#inquisitorial_button").addEventListener("click", toggleInquisitorialMember);
 
   document.querySelector("#close").addEventListener("click", () => {
-    
     popup.style.display = "none";
 
-   
-  });
-
+    document.querySelector("#expell_button").removeEventListener("click", () => {});
+    document
+      .querySelector("#prefect_button")
+      .removeEventListener("click", () => {});
+    document.querySelector("#inquisitorial_button").removeEventListener("click", () => {});
+  })
 
   //Div where the theme color will show
-const color_of_house = document.querySelector('#color_of_house');
-//Color for each house
-//Code from - https://www.w3schools.com/js/js_switch.asp
-switch (true) {
-  //If there is a match, the associated block of code is executed
-  //If there is no match, the default code block is executed (white background)
-  case student.house === 'Gryffindor':
-    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(95,27,5,1) 0%, rgba(121,35,9,1) 25%, rgba(166,62,6,1) 50%, rgba(207,74,3,1) 75%, rgba(255,101,0,1) 100%);'); 
-    break;
-  case student.house === 'Slytherin':
-    color_of_house.setAttribute('style', 'background: linear-gradient(360deg, rgba(42,98,61,1) 0%, rgba(26,71,42,1) 50%, rgba(0,0,0,1) 100%);');
-    break;
-  case student.house === 'Hufflepuff':
-    color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(36,30,0,1) 0%, rgba(121,105,9,1) 25%, rgba(169,157,6,1) 50%, rgba(214,188,3,1) 75%, rgba(255,223,0,1) 100%);');
-    break;
-  case student.house === 'Ravenclaw':
-    color_of_house.setAttribute('style', 'background: linear-gradient(360deg, rgba(34,47,91,1) 0%, rgba(14,26,64,1) 75%, rgba(0,0,0,1) 100%);');
-    break;
+  const color_of_house = document.querySelector('#color_of_house');
+  //Color for each house
+  //Code from - https://www.w3schools.com/js/js_switch.asp
+  switch (true) {
+    //If there is a match, the associated block of code is executed
+    //If there is no match, the default code block is executed (white background)
+    case student.house === 'Gryffindor':
+      color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(95,27,5,1) 0%, rgba(121,35,9,1) 25%, rgba(166,62,6,1) 50%, rgba(207,74,3,1) 75%, rgba(255,101,0,1) 100%);'); 
+      break;
+    case student.house === 'Slytherin':
+      color_of_house.setAttribute('style', 'background: linear-gradient(360deg, rgba(42,98,61,1) 0%, rgba(26,71,42,1) 50%, rgba(0,0,0,1) 100%);');
+      break;
+    case student.house === 'Hufflepuff':
+      color_of_house.setAttribute('style', 'background: linear-gradient(180deg, rgba(36,30,0,1) 0%, rgba(121,105,9,1) 25%, rgba(169,157,6,1) 50%, rgba(214,188,3,1) 75%, rgba(255,223,0,1) 100%);');
+      break;
+    case student.house === 'Ravenclaw':
+      color_of_house.setAttribute('style', 'background: linear-gradient(360deg, rgba(34,47,91,1) 0%, rgba(14,26,64,1) 75%, rgba(0,0,0,1) 100%);');
+      break;
+  }
+
+  selectedStudent = student; 
 
 
 }
-}
+
+
+function expell() {
+    if (selectedStudent.lastname != "Leva") {
+      //removes expelled student form allStudents list
+      if (selectedStudent.expelled === false) {
+        allStudents.splice(allStudents.indexOf(selectedStudent), 1);
+        selectedStudent.expelled = true;
+        selectedStudent.prefect = false;
+        selectedStudent.squad = false;
+        expelledStudents.push(selectedStudent);
+        document.querySelector("#expell_button").classList.add("button_clicked");
+        document.querySelector("#prefect_button").classList.remove("button_clicked");
+        document.querySelector("#inquisitorial_button").classList.remove("button_clicked");
+        console.log("expell student");
+      } else {
+        alert("!ERROR! - You have already expelled this student once... You can't do it twice...");
+        console.log("This student has been expelled once");
+      }
+    } else {
+      alert(`Bitch plz... U can't expell me 🧙‍♀️ ...but have you ever thought about this... If you remove the V and the T from Voldemort - he becomes much less scary... 🤣🤣🤣🤣`);
+    }
+  
+    buildList();
+  }
+  
+  function togglePrefect() {
+    console.log("toggle prefect");
+    if (selectedStudent.expelled === false) {
+      const index = allStudents.indexOf(selectedStudent);
+      if (selectedStudent.prefect === false) {
+        CheckIfStudentCanBecomePrefect();
+      } else {
+        removePrefect(selectedStudent);
+      }
+    } else {
+      alert("!ERROR! - An expelled student can't become a prefect!");
+    }
+  
+    function CheckIfStudentCanBecomePrefect() {
+      console.log("check if student can become prefect");
+      const thePrefects = [];
+      allStudents.filter((student) => {
+        if (student.house === selectedStudent.house && student.prefect === true) {
+          thePrefects.push(student);
+        }
+      });
+      console.log(thePrefects.length);
+      const numberOfPrefects = thePrefects.length;
+      const anotherPrefect = [];
+      thePrefects.filter((student) => {
+        if (student.gender === selectedStudent.gender) {
+          anotherPrefect.push(student);
+        }
+      });
+      console.log(anotherPrefect.length);
+      //if there is another of the same type
+      if (anotherPrefect.length >= 1) {
+        alert("!ERROR! - This student can't become a prefect! This house already has 2 prefects or 1 of the same gender. If this student is to become a prefect, you must remove another!");
+      } else {
+        console.log("add as prefect");
+        makeStudentPrefect(selectedStudent);
+      }
+    }
+  
+    function removePrefect(studentPrefect) {
+      document.querySelector("#prefect_button").classList.remove("button_clicked");
+      const index = allStudents.indexOf(studentPrefect);
+      allStudents[index].prefect = false;
+    }
+  
+    function makeStudentPrefect(studentPrefect) {
+      document.querySelector("#prefect_button").classList.add("button_clicked");
+      const index = allStudents.indexOf(studentPrefect);
+      allStudents[index].prefect = true;
+    }
+  }
+  
+  function toggleInquisitorialMember() {
+    console.log("toggle squad");
+    const index = allStudents.indexOf(selectedStudent);
+    if (selectedStudent.expelled === false) {
+      if (selectedStudent.squad === false) {
+        checkIfStudentIsQualifiedAsInquisitorialMember();
+      } else {
+        removeInquisitorialMember();
+      }
+    } else {
+      alert("!ERROR! - An expelled student can't become a member of The Inquisitorial Squad!");
+    }
+  
+    function checkIfStudentIsQualifiedAsInquisitorialMember() {
+      console.log("check if student can become inquisitorial");
+      if (
+        selectedStudent.bloodstatus === "Pure-blood" &&
+        selectedStudent.house === "Slytherin"
+      ) {
+        makeInquisitorialMember();
+      } else {
+        alert(
+          "Only pure-blooded students from Slytherin can join the Inquisitorial Squad! 🐍"
+        );
+      }
+    }
+  
+    function makeInquisitorialMember() {
+      if (systemHacked === true) {
+        setTimeout(function () {
+          toggleInquisitorialMember();
+        }, 1000);
+      }
+      allStudents[index].squad = true;
+      document.querySelector("#inquisitorial_button").classList.add("button_clicked");
+    }
+  
+    function removeInquisitorialMember() {
+      document.querySelector("#inquisitorial_button").classList.remove("button_clicked");
+      if (systemHacked === true) {
+        setTimeout(function () {
+          alert("I present my compliments to you and beg you to keep your abnormally large nose out of other people's business 👃 ...No 'Inquisitorial Members' for you");
+        }, 100);
+      }
+      allStudents[index].squad = false;
+    }
+  }
+  
+  function hackTheSystem() {
+    if (systemHacked === false) {
+      //add me to studentlist
+      console.log("What is going on? Hacking is going on!");
+      const helloItsMe = Object.create(Student);
+      helloItsMe.firstname = "Siff";
+      helloItsMe.lastname = "Leva";
+      helloItsMe.middlename = "";
+      helloItsMe.nickname = "";
+      helloItsMe.photo = "me.png";
+      helloItsMe.house = "Slytherin";
+      helloItsMe.gender = "Girl";
+      helloItsMe.prefect = false;
+      helloItsMe.expelled = false;
+      helloItsMe.bloodStatus = "Pureblood";
+      helloItsMe.squad = false;
+      BreakBloodStatusData();
+      allStudents.unshift(helloItsMe);
+  
+      systemHacked = true;
+  
+      buildList();
+      setTimeout(function () {
+        alert("I solemnly swear that I am up to no good 😏😏😏😏");
+      }, 100);
+    } else {
+      alert("Hacking is already happenin' 😎😎😎😎");
+    }
+  }
+  
+  function BreakBloodStatusData() {
+    allStudents.forEach((student) => {
+      if (student.bloodStatus === "Muggleborn") {
+        student.bloodStatus = "Pureblood";
+      } else if (student.bloodStatus === "Halfblood") {
+        student.bloodStatus = "Pureblood";
+      } else {
+        let bloodStatusMath = Math.floor(Math.random() * 3);
+        if (bloodStatusMath === 0) {
+          student.bloodStatus = "Muggleborn";
+        } else if (bloodStatusMath === 1) {
+          student.bloodStatus = "Halfblood";
+        } else {
+          student.bloodStatus = "Pureblood";
+        }
+      }
+    });
+  }
