@@ -109,13 +109,7 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(selectedBoys);
   } else if (filterType === "girl") {
     filteredList = allStudents.filter(selectedGirls);
-  } /* else if (filterType === "prefects") {
-    filteredList = allStudents.filter(selectedPrefects);
-  } */  /* else if (filterType === "pure") {
-    filteredList = allStudents.filter(selectedPureBlood);
-  } */ /*  else if (filterType === "halfblood") {
-    filteredList = allStudents.filter(selectedHalfBlood);
-  }  */
+  } 
   //TODO: filter on expelled and unexpelled
   else if (filterType === "expelled") {
     filteredList = expelledStudents;
@@ -150,6 +144,11 @@ function selectedRavenclaw(house) {
   return house.house === "Ravenclaw";
 }
 
+function selectedSlytherin(house) {
+  //returns true if student's house is Ravenclaw
+  return house.house === "Slytherin";
+}
+
 
 function selectedBoys(gender) {
   //returns true if student's house is Slytherin
@@ -160,27 +159,6 @@ function selectedGirls(gender) {
   //returns true if student's house is Slytherin
   return gender.gender === "Girl";
 }
-
-/* function selectedPrefects(prefect) {
-  //returns true if student is prefect
-  return prefects.prefect === "prefect";
-} */ 
-
-/* function selectedPureBlood(bloodStatus) {
-  if (bloodStatus.pure === "pure") {
-    return true;
-  } else {
-    return false;
-  }
-} */
-
-/* function selectedHalfBlood(bloodstatus) {
-  if (student.bloodstatus === "Halfblood") {
-    return true;
-  } else {
-    return false;
-  }
-} */
 
 
 function selectedSort(event) {
